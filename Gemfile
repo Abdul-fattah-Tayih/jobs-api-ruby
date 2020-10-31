@@ -11,6 +11,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 gem 'cancancan'
 gem 'devise_token_auth'
+gem 'acts_as_paranoid', '~> 0.7.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

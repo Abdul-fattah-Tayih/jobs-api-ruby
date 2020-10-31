@@ -1,4 +1,5 @@
 class JobPost < ApplicationRecord
+  acts_as_paranoid
   has_many :job_applications
   validates :title, length: { maximum: 255 }, presence: true
   validates_presence_of :description
