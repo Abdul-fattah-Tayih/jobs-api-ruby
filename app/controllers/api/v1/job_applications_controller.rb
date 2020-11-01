@@ -15,19 +15,21 @@ module Api
       end
 
       def create
-        # TODO add user association from current_user
-        @job_application = JobApplication.new(job_application_params)
+        @job_application = JobApplication.new
+        job_post = JobPost.find(params[:job_post_id])
+        @job_application.job_post = job_post
+        @job_application.user = current_user
         if @job_application.save
           render json: @job_application, status: :created
+        else
+          render json: { status: :bad_request, errors: @job_application.errors }, status: :bad_request
         end
-        
-        render json: { status: :bad_request, errors: @job_application.errors }, status: :bad_request
       end
 
       private
 
       def job_application_params
-        params.require(:job_post_id)
+        params.permit(:job_post_id)
       end
     end
   end

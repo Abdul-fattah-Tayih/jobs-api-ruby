@@ -4,6 +4,7 @@ module Api
       alias_method :current_user, :current_api_v1_user
       load_and_authorize_resource
       skip_authorize_resource :only => :show
+
       def index
         @job_posts = JobPost.order('created_at DESC')
         render json: @job_posts
@@ -18,18 +19,18 @@ module Api
         @job_post = JobPost.new(job_post_params)
         if @job_post.save
           render json: @job_post, status: :created
+        else
+          render json: { status: :bad_request, errors: @job_post.errors }
         end
-
-        render json: { status: :bad_request, errors: @job_post.errors }
       end
 
       def update
         @job_post = JobPost.find(params[:id])
         if @job_post.update_attributes(job_post_params)
           render json: @job_post
+        else
+          render json: { status: :bad_request, errors: @job_post.errors }
         end
-
-        render json: { status: :bad_request, errors: @job_post.errors }
       end
 
       def destroy

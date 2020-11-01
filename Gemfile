@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
   gem 'faker'
 end
 

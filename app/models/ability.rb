@@ -8,7 +8,7 @@ class Ability
 
     if user.present?
       can :create, JobApplication
-      can :read, JobApplication, user_id: user.id
+      can :show, JobApplication, :user_id => user.id
 
       if user.admin?
         can :manage, JobPost
