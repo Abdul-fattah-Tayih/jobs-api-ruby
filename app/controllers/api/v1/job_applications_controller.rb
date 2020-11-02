@@ -11,6 +11,9 @@ module Api
 
       def show
         @job_application = JobApplication.find(params[:id])
+
+        if current_user.admin? && !@job_application.seen? then @job_application.update(seen: true) end
+
         render json: @job_application.as_json(include: %i[user job_post])
       end
 
